@@ -9,7 +9,6 @@ var TITLES = [
   "Котячий хостел",
   "Домик на дереве",
 ];
-
 var FEATURES = [
   "wifi",
   "dishwasher",
@@ -18,7 +17,6 @@ var FEATURES = [
   "elevator",
   "conditioner",
 ];
-
 var DESCRIPTIONS = [
   "Близко к магазинам",
   "Вид на соседний дом",
@@ -29,15 +27,13 @@ var DESCRIPTIONS = [
   "Горячая вода, холодной нет",
   "Можно драть диваны",
 ];
-
 var PHOTOS = [
   "http://o0.github.io/assets/images/tokyo/hotel1.jpg",
   "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
   "http://o0.github.io/assets/images/tokyo/hotel3.jpg",
 ];
-
 var TOTAL_PINS = 8;
-var mapBlockSize = document.querySelector(".map__pins").clientWidth;
+var mapBlockSize = document.querySelector(".map__pins").clientWidth - 50;
 var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
 
 function shuffle(array) {
@@ -49,7 +45,6 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 
@@ -58,7 +53,7 @@ var fetchAvatar = function (index) {
 };
 
 var getRandomNumber = function (min, max, index) {
-  return Math.round(Math.random(min, max) * index) + 1;
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 var fetchType = function () {
@@ -86,7 +81,7 @@ var getRandomAdverts = function (size) {
       },
       offer: {
         title: TITLES[i],
-        address: [getRandomNumber(1, 100, 1000), getRandomNumber(1, 100, 1000)].join(', '),
+        address: [getRandomNumber(1, 100), getRandomNumber(1, 100)].join(', '),
         price: getRandomNumber(1, 100, 100) + " USD",
         type: fetchType(),
         rooms: getRandomNumber(1, 10, 10),
@@ -97,13 +92,12 @@ var getRandomAdverts = function (size) {
         description: DESCRIPTIONS[i],
         photos: fetchRandomElementsOfArray(PHOTOS)
       },
-
       location: {
-        x: getRandomNumber(1, mapBlockSize, 1000),
-        y: getRandomNumber(130, 630, 1000)
+        x: getRandomNumber(1, mapBlockSize),
+        y: getRandomNumber(130, 630)
       }
     };
-  };
+  }
   return adverts;
 };
 
@@ -114,14 +108,15 @@ activateMap();
 
 var renderPin = function (ads) {
   var fragment = document.createDocumentFragment();
-
+  var newPinTemplate;
   for (var i = 0; i < ads.length; i++) {
-    var newPinTemplate = templatePin.cloneNode(true);
+    newPinTemplate = templatePin.cloneNode(true);
     newPinTemplate.querySelector('img').src = ads[i].author.avatar;
     newPinTemplate.querySelector('img').alt = ads[i].offer.title;
     newPinTemplate.style = 'left: ' + (ads[i].location.x) + 'px; top: ' + (ads[i].location.y) + 'px;';
     fragment.appendChild(newPinTemplate);
   }
+  document.querySelector('.map__pins').appendChild(fragment);
 };
 
 renderPin(getRandomAdverts(TOTAL_PINS));
