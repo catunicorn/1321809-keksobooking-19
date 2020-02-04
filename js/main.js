@@ -37,20 +37,6 @@ var TOTAL_PINS = 8;
 var mapBlockSize = document.querySelector('.map__pins').clientWidth - 50;
 var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
 
-function shuffle(array) {
-  var currentIndex = array.length;
-  var temporaryValue;
-  var randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-}
-
 var fetchAvatar = function (index) {
   return USER_AVATAR_TEMPLATE_URL.replace('{{xx}}', '0' + (index + 1));
 };
@@ -71,8 +57,7 @@ var fetchCheck = function () {
 
 var fetchRandomElementsOfArray = function (array) {
   var size = Math.floor((Math.random() * array.length)) + 1;
-  var features = shuffle(array);
-  return features.slice(0, size);
+  return array.slice(0, size);
 };
 
 var getRandomAdverts = function (size) {
