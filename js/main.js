@@ -1,39 +1,39 @@
 var USER_AVATAR_TEMPLATE_URL = 'img/avatars/user{{xx}}.png';
 var TITLES = [
-  "Картонная коробка",
-  "Однокомнатный люкс",
-  "Мягкий кошачий домик",
-  "Огромный пакет",
-  "Президентский люкс",
-  "Эконом будка",
-  "Котячий хостел",
-  "Домик на дереве",
+  'Картонная коробка',
+  'Однокомнатный люкс',
+  'Мягкий кошачий домик',
+  'Огромный пакет',
+  'Президентский люкс',
+  'Эконом будка',
+  'Котячий хостел',
+  'Домик на дереве',
 ];
 var FEATURES = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner",
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
 ];
 var DESCRIPTIONS = [
-  "Близко к магазинам",
-  "Вид на соседний дом",
-  "Спальный район",
-  "Соседи котики",
-  "Бесплатный интернет от соседей",
-  "Верхний этаж",
-  "Горячая вода, холодной нет",
-  "Можно драть диваны",
+  'Близко к магазинам',
+  'Вид на соседний дом',
+  'Спальный район',
+  'Соседи котики',
+  'Бесплатный интернет от соседей',
+  'Верхний этаж',
+  'Горячая вода, холодной нет',
+  'Можно драть диваны',
 ];
 var PHOTOS = [
-  "http://o0.github.io/assets/images/tokyo/hotel1.jpg",
-  "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
-  "http://o0.github.io/assets/images/tokyo/hotel3.jpg",
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 var TOTAL_PINS = 8;
-var mapBlockSize = document.querySelector(".map__pins").clientWidth - 50;
+var mapBlockSize = document.querySelector('.map__pins').clientWidth - 50;
 var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
 
 function shuffle(array) {
@@ -49,7 +49,7 @@ function shuffle(array) {
 }
 
 var fetchAvatar = function (index) {
-  return USER_AVATAR_TEMPLATE_URL.replace('{{xx}}', "0" + (index + 1));
+  return USER_AVATAR_TEMPLATE_URL.replace('{{xx}}', '0' + (index + 1));
 };
 
 var getRandomNumber = function (min, max, index) {
@@ -57,12 +57,12 @@ var getRandomNumber = function (min, max, index) {
 };
 
 var fetchType = function () {
-  var types = ["palace", "flat", "house", "bungalo"];
+  var types = ['palace', 'flat', 'house', 'bungalo'];
   return types[Math.floor((Math.random() * types.length))];
 };
 
 var fetchCheck = function () {
-  var checkTimes = ["12:00", "13:00", "14:00"];
+  var checkTimes = ['12:00', '13:00', '14:00'];
   return checkTimes[Math.floor((Math.random() * checkTimes.length))];
 };
 
@@ -82,7 +82,7 @@ var getRandomAdverts = function (size) {
       offer: {
         title: TITLES[i],
         address: [getRandomNumber(1, 100), getRandomNumber(1, 100)].join(', '),
-        price: getRandomNumber(1, 100, 100) + " USD",
+        price: getRandomNumber(1, 100, 100) + ' USD',
         type: fetchType(),
         rooms: getRandomNumber(1, 10, 10),
         guests: getRandomNumber(1, 10, 10),
