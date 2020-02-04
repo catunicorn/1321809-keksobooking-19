@@ -1,3 +1,4 @@
+'use strict';
 var USER_AVATAR_TEMPLATE_URL = 'img/avatars/user{{xx}}.png';
 var TITLES = [
   'Картонная коробка',
@@ -37,8 +38,10 @@ var mapBlockSize = document.querySelector('.map__pins').clientWidth - 50;
 var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
 
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  while (0 !== currentIndex) {
+  var currentIndex = array.length;
+  var temporaryValue;
+  var randomIndex;
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
     temporaryValue = array[currentIndex];
@@ -52,7 +55,7 @@ var fetchAvatar = function (index) {
   return USER_AVATAR_TEMPLATE_URL.replace('{{xx}}', '0' + (index + 1));
 };
 
-var getRandomNumber = function (min, max, index) {
+var getRandomNumber = function (min, max) {
   return Math.round(Math.random() * (max - min) + min);
 };
 
